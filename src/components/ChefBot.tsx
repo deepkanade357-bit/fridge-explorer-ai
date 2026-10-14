@@ -31,8 +31,8 @@ function friendlyError(status: number | "network", message?: string) {
 
 function BotMessage({ content }: { content: string }) {
   const { addIngredients, selected, favourites, toggleFavourite } = useAppStore();
-  const recipeIds = [...content.matchAll(/\[\[recipe:([a-z0-9-]+)\]\]/g)].map((m) => m[1]).filter((id) => RECIPE_MAP[id]);
-  const addIds = [...content.matchAll(/\[\[add:([a-z0-9-]+)\]\]/g)].map((m) => m[1]).filter((id) => INGREDIENT_MAP[id]);
+  const recipeIds = [...content.matchAll(/\[\[recipe:([a-z0-9-]+)\]\]/g)].map((m) => m[1]!).filter((id) => RECIPE_MAP[id]);
+  const addIds = [...content.matchAll(/\[\[add:([a-z0-9-]+)\]\]/g)].map((m) => m[1]!).filter((id) => INGREDIENT_MAP[id]);
   const clean = content.replace(/\[\[(recipe|add):[^\]]*\]\]?/g, "").replace(/\[\[[^\]]*$/, "");
   return (
     <div className="space-y-2">
@@ -174,7 +174,7 @@ export function ChefBot() {
 
   function retry() {
     const history = chat.filter((m) => !m.error && (m.role === "user" || m.content));
-    if (history.length && history[history.length - 1].role === "user") run(history);
+    if (history.length && history[history.length - 1]!.role === "user") run(history);
   }
 
   function clear() {

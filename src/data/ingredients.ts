@@ -120,7 +120,7 @@ function build(): Ingredient[] {
   const out: Ingredient[] = [];
   for (const cat of CATEGORY_ORDER) {
     for (const line of RAW[cat]) {
-      const [name, emoji, extra] = line.split("|");
+      const [name = "", emoji = "", extra = ""] = line.split("|");
       const paren = name.match(/\((.*?)\)/)?.[1];
       const aliases = [
         ...(paren ? [paren.toLowerCase()] : []),

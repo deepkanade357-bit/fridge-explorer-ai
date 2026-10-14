@@ -29,14 +29,14 @@ export function Markdown({ text }: { text: string }) {
       const ordered = !!ol;
       if (list && list.ordered !== ordered) flush();
       if (!list) list = { ordered, items: [] };
-      list.items.push((ul ?? ol)![1]);
+      list.items.push((ul ?? ol)![1] ?? "");
       continue;
     }
     flush();
     if (!line.trim()) continue;
     const h = line.match(/^#{1,4}\s+(.*)/);
     blocks.push(
-      h ? <p key={blocks.length} className="font-bold">{inline(h[1])}</p> : <p key={blocks.length}>{inline(line)}</p>,
+      h ? <p key={blocks.length} className="font-bold">{inline(h[1] ?? "")}</p> : <p key={blocks.length}>{inline(line)}</p>,
     );
   }
   flush();
