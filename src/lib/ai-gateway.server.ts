@@ -4,7 +4,7 @@ export const GATEWAY_URL = "https://ai.gateway.lovable.dev/v1/responses";
 export const CHAT_MODEL = "openai/gpt-6-astra";
 
 export function getApiKey() {
-  const key = process.env.LOVABLE_API_KEY;
+  const key = process.env['LOVABLE_API_KEY'];
   if (!key) throw new Error("LOVABLE_API_KEY missing");
   return key;
 }

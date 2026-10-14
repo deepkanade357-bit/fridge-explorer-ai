@@ -36,7 +36,7 @@ export function checkFrameQuality(video: HTMLVideoElement): "dark" | "blurry" | 
   ctx.drawImage(video, 0, 0, w, h);
   const d = ctx.getImageData(0, 0, w, h).data;
   const lum: number[] = [];
-  for (let i = 0; i < d.length; i += 4) lum.push(0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2]);
+  for (let i = 0; i < d.length; i += 4) lum.push(0.299 * d[i]! + 0.587 * d[i + 1]! + 0.114 * d[i + 2]!);
   const mean = lum.reduce((a, b) => a + b, 0) / lum.length;
   if (mean < 35) return "dark";
   // edge energy (simple horizontal/vertical differences)
@@ -44,7 +44,7 @@ export function checkFrameQuality(video: HTMLVideoElement): "dark" | "blurry" | 
   for (let y = 0; y < h - 1; y++)
     for (let x = 0; x < w - 1; x++) {
       const i = y * w + x;
-      edge += Math.abs(lum[i] - lum[i + 1]) + Math.abs(lum[i] - lum[i + w]);
+      edge += Math.abs(lum[i]! - lum[i + 1]!) + Math.abs(lum[i]! - lum[i + w]!);
     }
   if (edge / (w * h) < 4) return "blurry";
   return "ok";

@@ -16,11 +16,11 @@ type Msg = { role: "user" | "assistant"; content: string };
 function buildContext(ctx: Record<string, unknown>) {
   const safe = (v: unknown) => JSON.stringify(v ?? null).slice(0, 4000);
   return `App context (live, from the user's session):
-- Selected ingredients: ${safe(ctx.selectedIngredients)}
-- Latest fridge scan: ${safe(ctx.lastScan)}
-- Recipe currently viewed: ${safe(ctx.currentRecipe)}
-- Favourite recipes: ${safe(ctx.favourites)}
-- Veg preference: ${safe(ctx.vegOnly)}
+- Selected ingredients: ${safe(ctx['selectedIngredients'])}
+- Latest fridge scan: ${safe(ctx['lastScan'])}
+- Recipe currently viewed: ${safe(ctx['currentRecipe'])}
+- Favourite recipes: ${safe(ctx['favourites'])}
+- Veg preference: ${safe(ctx['vegOnly'])}
 
 What2Cook recipe database (id: name [veg/non-veg, minutes]):
 ${RECIPES.map((r) => `${r.id}: ${r.name} [${r.veg ? "veg" : "non-veg"}, ${r.time}m]`).join("\n")}
@@ -44,7 +44,7 @@ export const Route = createFileRoute("/api/chat")({
         } catch {
           return Response.json({ error: "bad_request", message: "Invalid request." }, { status: 400 });
         }
-        if (!messages.length || messages[messages.length - 1].role !== "user")
+        if (!messages.length || messages[messages.length - 1]!.role !== "user")
           return Response.json({ error: "bad_request", message: "Send a message first." }, { status: 400 });
 
         try {
