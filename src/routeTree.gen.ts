@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as FindRouteImport } from './routes/find'
 import { Route as RecipesRouteImport } from './routes/recipes'
+import { Route as ScanRouteImport } from './routes/scan'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as ApiScanRouteImport } from './routes/api/scan'
 import { Route as RecipesIndexRouteImport } from './routes/recipes.index'
@@ -44,6 +45,11 @@ const RecipesRoute = RecipesRouteImport.update({
   path: '/recipes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ScanRoute = ScanRouteImport.update({
+  id: '/scan',
+  path: '/scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/find': typeof FindRoute
   '/recipes': typeof RecipesRouteWithChildren
+  '/scan': typeof ScanRoute
   '/api/chat': typeof ApiChatRoute
   '/api/scan': typeof ApiScanRoute
   '/recipes/$id': typeof RecipesIdRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/dashboard': typeof DashboardRoute
   '/find': typeof FindRoute
+  '/scan': typeof ScanRoute
   '/api/chat': typeof ApiChatRoute
   '/api/scan': typeof ApiScanRoute
   '/recipes/$id': typeof RecipesIdRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/find': typeof FindRoute
   '/recipes': typeof RecipesRouteWithChildren
+  '/scan': typeof ScanRoute
   '/api/chat': typeof ApiChatRoute
   '/api/scan': typeof ApiScanRoute
   '/recipes/$id': typeof RecipesIdRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/find'
     | '/recipes'
+    | '/scan'
     | '/api/chat'
     | '/api/scan'
     | '/recipes/$id'
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/dashboard'
     | '/find'
+    | '/scan'
     | '/api/chat'
     | '/api/scan'
     | '/recipes/$id'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/find'
     | '/recipes'
+    | '/scan'
     | '/api/chat'
     | '/api/scan'
     | '/recipes/$id'
@@ -139,6 +151,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   FindRoute: typeof FindRoute
   RecipesRoute: typeof RecipesRouteWithChildren
+  ScanRoute: typeof ScanRoute
   ApiChatRoute: typeof ApiChatRoute
   ApiScanRoute: typeof ApiScanRoute
 }
@@ -178,6 +191,13 @@ declare module '@tanstack/react-router' {
       path: '/recipes'
       fullPath: '/recipes'
       preLoaderRoute: typeof RecipesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scan': {
+      id: '/scan'
+      path: '/scan'
+      fullPath: '/scan'
+      preLoaderRoute: typeof ScanRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/chat': {
@@ -230,6 +250,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   FindRoute: FindRoute,
   RecipesRoute: RecipesRouteWithChildren,
+  ScanRoute: ScanRoute,
   ApiChatRoute: ApiChatRoute,
   ApiScanRoute: ApiScanRoute,
 }
