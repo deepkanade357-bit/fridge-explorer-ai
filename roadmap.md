@@ -1,0 +1,4 @@
+- [ ] Add dedicated searchable/filterable A–Z cookbook and navigation entry.
+- [ ] Expand recipe data to cover the ingredient list and retain complete recipe details.
+- [ ] Add reusable categorized shopping-list dialog with checkboxes and copy action.
+- [ ] Add tests for ingredient coverage and shopping-list behavior; verify preview diagnostics.
