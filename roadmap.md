@@ -1,4 +1,6 @@
+- [ ] Fix Chef Bot missing recipe/ingredient handling and clear current TypeScript/build errors.
 - [ ] Add dedicated searchable/filterable A–Z cookbook and navigation entry.
-- [ ] Expand recipe data to cover the ingredient list and retain complete recipe details.
-- [ ] Add reusable categorized shopping-list dialog with checkboxes and copy action.
-- [ ] Add tests for ingredient coverage and shopping-list behavior; verify preview diagnostics.
+- [ ] Expand recipes to cover the supplied ingredient database with complete cooking details.
+- [ ] Add reusable categorized shopping lists with checklist and copy on recommendations and recipe details.
+- [ ] Add owner/client account signup and login with secure role separation and profile basics.
+- [ ] Add focused tests and verify preview diagnostics and the key user flows.
