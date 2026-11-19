@@ -39,6 +39,7 @@ function BotMessage({ content }: { content: string }) {
       <Markdown text={clean} />
       {[...new Set(recipeIds)].map((id) => {
         const r = RECIPE_MAP[id];
+        if (!r) return null;
         const m = matchRecipe(r, selected);
         const fav = favourites.includes(id);
         return (
@@ -60,6 +61,7 @@ function BotMessage({ content }: { content: string }) {
         <div className="flex flex-wrap gap-2">
           {[...new Set(addIds)].map((id) => {
             const ing = INGREDIENT_MAP[id];
+            if (!ing) return null;
             const has = selected.includes(id);
             return (
               <Button key={id} size="sm" variant="secondary" disabled={has} onClick={() => { addIngredients([id]); toast.success(`${ing.name} added to your ingredients`); }}>
