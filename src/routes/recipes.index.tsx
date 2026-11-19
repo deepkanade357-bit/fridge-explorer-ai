@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { RecipeCard } from "@/components/RecipeCard";
 import { RECIPES } from "@/data/recipes";
 import { recommend } from "@/lib/matcher";
+import { ShoppingListButton } from "@/components/ShoppingList";
 import { useAppStore } from "@/lib/app-store";
 
 export const Route = createFileRoute("/recipes/")({
@@ -36,6 +37,7 @@ function Recipes() {
         <label className="flex items-center gap-2 text-sm font-semibold">
           <Switch checked={vegOnly} onCheckedChange={setVegOnly} /> Veg only
         </label>
+        <Button asChild variant="outline" className="rounded-full"><Link to="/recipes/a-z">A–Z Cookbook</Link></Button>
       </div>
 
       {selected.length === 0 ? (
@@ -55,7 +57,10 @@ function Recipes() {
 
       {favs.length > 0 && (
         <section>
-          <h2 className="mb-4 font-display text-2xl font-bold">Your favourites</h2>
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <h2 className="font-display text-2xl font-bold">Your favourites</h2>
+            <ShoppingListButton recipes={favs} label="Grocery list for favourites" />
+          </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {favs.map((r) => <RecipeCard key={r.id} recipe={r} />)}
           </div>

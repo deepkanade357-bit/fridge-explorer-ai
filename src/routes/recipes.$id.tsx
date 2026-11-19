@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Clock, Heart, Users } from "lucide-react";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { ShoppingListButton } from "@/components/ShoppingList";
 import { MatchBadge } from "@/components/RecipeCard";
 import { RECIPE_MAP } from "@/data/recipes";
 import { INGREDIENT_MAP } from "@/data/ingredients";
@@ -84,6 +85,9 @@ function RecipePage() {
             <Button size="sm" variant="secondary" className="mt-4 rounded-full" onClick={() => addIngredients(m.missing)}>
               I have the missing items
             </Button>
+          )}
+          {m.missing.length > 0 && (
+            <div className="mt-3"><ShoppingListButton recipes={[r]} label="Shopping list for missing items" /></div>
           )}
         </section>
         <section className="rounded-3xl border bg-card p-5">

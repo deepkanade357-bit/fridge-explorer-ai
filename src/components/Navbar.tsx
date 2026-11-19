@@ -2,12 +2,14 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useAppStore } from "@/lib/app-store";
+import { useAuth } from "@/hooks/useAuth";
 
 const LINKS = [
   { to: "/", label: "Home" },
   { to: "/find", label: "Find Recipes" },
   { to: "/scan", label: "Scan Fridge" },
   { to: "/recipes", label: "Recommendations" },
+  { to: "/recipes/a-z", label: "A–Z" },
   { to: "/dashboard", label: "Dashboard" },
   { to: "/about", label: "About" },
 ] as const;
@@ -15,6 +17,8 @@ const LINKS = [
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const { selected } = useAppStore();
+  const { user } = useAuth();
+  const acct = user ? "My account" : "Sign in";
   return (
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
@@ -26,7 +30,7 @@ export function Navbar() {
             <Link
               key={l.to}
               to={l.to}
-              activeOptions={{ exact: l.to === "/" }}
+              activeOptions={{ exact: l.to === "/" || l.to === "/recipes" }}
               className="rounded-full px-3 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground data-[status=active]:bg-secondary data-[status=active]:text-secondary-foreground"
             >
               {l.label}
@@ -36,6 +40,7 @@ export function Navbar() {
             </Link>
           ))}
         </div>
+        <Link to={user ? "/account" : "/auth"} className="ml-auto mr-2 rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground lg:ml-2 lg:mr-0">{acct}</Link>
         <button className="rounded-full p-2 lg:hidden" aria-label="Toggle menu" onClick={() => setOpen((o) => !o)}>
           {open ? <X className="size-6" /> : <Menu className="size-6" />}
         </button>
@@ -47,7 +52,7 @@ export function Navbar() {
               key={l.to}
               to={l.to}
               onClick={() => setOpen(false)}
-              activeOptions={{ exact: l.to === "/" }}
+              activeOptions={{ exact: l.to === "/" || l.to === "/recipes" }}
               className="block rounded-xl px-3 py-3 font-semibold data-[status=active]:bg-secondary"
             >
               {l.label}

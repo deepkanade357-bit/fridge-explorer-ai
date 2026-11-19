@@ -11,14 +11,18 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AccountRouteImport } from './routes/account'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as FindRouteImport } from './routes/find'
 import { Route as RecipesRouteImport } from './routes/recipes'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ScanRouteImport } from './routes/scan'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as ApiScanRouteImport } from './routes/api/scan'
 import { Route as RecipesIndexRouteImport } from './routes/recipes.index'
 import { Route as RecipesIdRouteImport } from './routes/recipes.$id'
+import { Route as RecipesAZRouteImport } from './routes/recipes.a-z'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,6 +32,16 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -43,6 +57,11 @@ const FindRoute = FindRouteImport.update({
 const RecipesRoute = RecipesRouteImport.update({
   id: '/recipes',
   path: '/recipes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ScanRoute = ScanRouteImport.update({
@@ -70,41 +89,58 @@ const RecipesIdRoute = RecipesIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => RecipesRoute,
 } as any)
+const RecipesAZRoute = RecipesAZRouteImport.update({
+  id: '/a-z',
+  path: '/a-z',
+  getParentRoute: () => RecipesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
+  '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/find': typeof FindRoute
   '/recipes': typeof RecipesRouteWithChildren
+  '/reset-password': typeof ResetPasswordRoute
   '/scan': typeof ScanRoute
   '/api/chat': typeof ApiChatRoute
   '/api/scan': typeof ApiScanRoute
   '/recipes/$id': typeof RecipesIdRoute
+  '/recipes/a-z': typeof RecipesAZRoute
   '/recipes/': typeof RecipesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
+  '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/find': typeof FindRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/scan': typeof ScanRoute
   '/api/chat': typeof ApiChatRoute
   '/api/scan': typeof ApiScanRoute
   '/recipes/$id': typeof RecipesIdRoute
+  '/recipes/a-z': typeof RecipesAZRoute
   '/recipes': typeof RecipesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
+  '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/find': typeof FindRoute
   '/recipes': typeof RecipesRouteWithChildren
+  '/reset-password': typeof ResetPasswordRoute
   '/scan': typeof ScanRoute
   '/api/chat': typeof ApiChatRoute
   '/api/scan': typeof ApiScanRoute
   '/recipes/$id': typeof RecipesIdRoute
+  '/recipes/a-z': typeof RecipesAZRoute
   '/recipes/': typeof RecipesIndexRoute
 }
 export interface FileRouteTypes {
@@ -112,45 +148,60 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/account'
+    | '/auth'
     | '/dashboard'
     | '/find'
     | '/recipes'
+    | '/reset-password'
     | '/scan'
     | '/api/chat'
     | '/api/scan'
     | '/recipes/$id'
+    | '/recipes/a-z'
     | '/recipes/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/account'
+    | '/auth'
     | '/dashboard'
     | '/find'
+    | '/reset-password'
     | '/scan'
     | '/api/chat'
     | '/api/scan'
     | '/recipes/$id'
+    | '/recipes/a-z'
     | '/recipes'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/account'
+    | '/auth'
     | '/dashboard'
     | '/find'
     | '/recipes'
+    | '/reset-password'
     | '/scan'
     | '/api/chat'
     | '/api/scan'
     | '/recipes/$id'
+    | '/recipes/a-z'
     | '/recipes/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AccountRoute: typeof AccountRoute
+  AuthRoute: typeof AuthRoute
   DashboardRoute: typeof DashboardRoute
   FindRoute: typeof FindRoute
   RecipesRoute: typeof RecipesRouteWithChildren
+  ResetPasswordRoute: typeof ResetPasswordRoute
   ScanRoute: typeof ScanRoute
   ApiChatRoute: typeof ApiChatRoute
   ApiScanRoute: typeof ApiScanRoute
@@ -172,6 +223,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -191,6 +256,13 @@ declare module '@tanstack/react-router' {
       path: '/recipes'
       fullPath: '/recipes'
       preLoaderRoute: typeof RecipesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/scan': {
@@ -228,16 +300,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RecipesIdRouteImport
       parentRoute: typeof RecipesRoute
     }
+    '/recipes/a-z': {
+      id: '/recipes/a-z'
+      path: '/a-z'
+      fullPath: '/recipes/a-z'
+      preLoaderRoute: typeof RecipesAZRouteImport
+      parentRoute: typeof RecipesRoute
+    }
   }
 }
 
 interface RecipesRouteChildren {
   RecipesIdRoute: typeof RecipesIdRoute
+  RecipesAZRoute: typeof RecipesAZRoute
   RecipesIndexRoute: typeof RecipesIndexRoute
 }
 
 const RecipesRouteChildren: RecipesRouteChildren = {
   RecipesIdRoute: RecipesIdRoute,
+  RecipesAZRoute: RecipesAZRoute,
   RecipesIndexRoute: RecipesIndexRoute,
 }
 
@@ -247,9 +328,12 @@ const RecipesRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AccountRoute: AccountRoute,
+  AuthRoute: AuthRoute,
   DashboardRoute: DashboardRoute,
   FindRoute: FindRoute,
   RecipesRoute: RecipesRouteWithChildren,
+  ResetPasswordRoute: ResetPasswordRoute,
   ScanRoute: ScanRoute,
   ApiChatRoute: ApiChatRoute,
   ApiScanRoute: ApiScanRoute,
