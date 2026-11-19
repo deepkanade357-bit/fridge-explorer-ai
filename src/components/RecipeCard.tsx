@@ -9,7 +9,7 @@ export function MatchBadge({ percent }: { percent: number }) {
   return <span className={cn("rounded-full px-2.5 py-1 text-xs font-bold", tone)}>{percent}% match</span>;
 }
 
-export function RecipeCard({ recipe, percent, missing }: { recipe: Recipe; percent?: number; missing?: number }) {
+export function RecipeCard({ recipe, percent, missing }: { recipe: Recipe; percent?: number | undefined; missing?: number | undefined }) {
   const { favourites, toggleFavourite } = useAppStore();
   const fav = favourites.includes(recipe.id);
   return (

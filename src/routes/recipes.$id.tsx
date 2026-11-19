@@ -87,7 +87,7 @@ function RecipePage() {
             </Button>
           )}
           {m.missing.length > 0 && (
-            <div className="mt-3"><ShoppingListButton recipes={[r]} label="Shopping list for missing items" /></div>
+            <div className="mt-3"><ShoppingListButton recipes={[recipe]} label="Shopping list for missing items" /></div>
           )}
         </section>
         <section className="rounded-3xl border bg-card p-5">
